@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../main";
 import {  useNavigate } from "react-router-dom";
 import { useToast } from "../components/Toast/ToastContext";
@@ -16,9 +16,10 @@ const Login = () => {
 
     const handelLogin = async (e) => {
         e.preventDefault();
-        if (isAuthenticated) {
+       
+            if (isAuthenticated) {
             return <navigateTp to={"/"} />
-        }
+            }
         try{
             const response= await axios.post("http://localhost:4800/api/v1/user/patient/login",{
                 email,password,confirmPassword,role:"Patient"
@@ -31,7 +32,7 @@ const Login = () => {
             navigateTp("/")
 
         }catch(error){
-            toast.error(error.response.data.message)
+            toast.error(error.response.data.message ||"Server not running")
         }
 
     }
@@ -41,7 +42,7 @@ const Login = () => {
             <h1>Welcome to ZeeCare Portal</h1>
             
             <p>Please Login To Continue</p>
-            <p> To manage appointments, view medical records, and stay connected with your healthcare provider.</p>
+            <p style={{marginTop:"50px"}}> To manage appointments, view medical records, and stay connected with your healthcare provider.</p>
             <form onSubmit={handelLogin}>
                 <input type="text" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}></input>
                 <input type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
@@ -52,6 +53,7 @@ const Login = () => {
                 <div style={{ justifyContent: "center", alignItems: "center" }}>
                     <button type="submit">Login</button>
                 </div>
+                
             </form>
         </div>
     )

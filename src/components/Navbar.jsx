@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useToast } from "./Toast/ToastContext";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -30,20 +30,17 @@ const Navbar = () => {
     }
     return (
         <nav className="container">
-            <div className="logo " onClick={()=>navigateTp("/")}>ZeeCare</div>
+            <div className="logo " onClick={() => navigateTp("/")}>ZeeCare</div>
             <div className={show ? "navLinks showmenu" : "navLinks"}>
                 <div className="links">
                     <Link to={"/"}>Home</Link>
                     <Link to={"/appointment"}>APPOINMENT</Link>
                     <Link to={"/aboutus"}>ABOUT US</Link>
                 </div>
-                { isAuthenticated ? (<button className="logoutBtn btn" onClick={() => handelLogout()}>LOGOUT</button>) :
+                {isAuthenticated ? (<button className="logoutBtn btn" onClick={() => handelLogout()}>LOGOUT</button>) :
                     (<button className="logoutBtn btn" onClick={gotologin}>LOGIN</button>)}
-
             </div>
-
         </nav>
     )
 }
-
 export default Navbar;
