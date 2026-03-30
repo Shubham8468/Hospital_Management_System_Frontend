@@ -52,7 +52,7 @@ const handleMessage=async (e)=>{
                     </div>
                     <div>
                     <input type="email" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-                    <input type="number" placeholder="Phone Number" value={phone} onChange={(e)=>setPhone(e.target.value)}/>
+                    <input type="number" placeholder="Phone number must be exactly 10 digits. " value={phone} onChange={(e)=>setPhone(e.target.value)}/>
                 </div>
                 <textarea rows={7} placeholder="Message"
                  value={message} onChange={(e)=>setMessage(e.target.value)}

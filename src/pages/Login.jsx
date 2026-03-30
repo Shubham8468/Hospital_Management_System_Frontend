@@ -1,7 +1,59 @@
-import React from "react";
-const Login=()=>{
+import React, { useContext, useState } from "react";
+import { Context } from "../main";
+import {  useNavigate } from "react-router-dom";
+import { useToast } from "../components/Toast/ToastContext";
+import axios from "axios";
+
+const Login = () => {
+    const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+    const toast = useToast();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const navigateTp = useNavigate();
+
+
+    const handelLogin = async (e) => {
+        e.preventDefault();
+        if (isAuthenticated) {
+            return <navigateTp to={"/"} />
+        }
+        try{
+            const response= await axios.post("http://localhost:4800/api/v1/user/patient/login",{
+                email,password,confirmPassword,role:"Patient"
+            },{
+                withCredentials:true ,
+                headers:{"Context-Type":"application/json"}
+            })
+            toast.success(response.data?.message);
+            //after this we re derdicter to user Home page
+            navigateTp("/")
+
+        }catch(error){
+            toast.error(error.response.data.message)
+        }
+
+    }
+
     return (
-        <div>   </div>
+        <div className="container form-component login-form">
+            <h1>Welcome to ZeeCare Portal</h1>
+            
+            <p>Please Login To Continue</p>
+            <p> To manage appointments, view medical records, and stay connected with your healthcare provider.</p>
+            <form onSubmit={handelLogin}>
+                <input type="text" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}></input>
+                <input type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
+                <input type="Password" value={confirmPassword} placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)}></input>
+                <div style={{ gap: "10px", justifyContent: "flex-end", flexDirection: "row" }}>
+                    <p style={{ marginBottom: 0 }} onClick={() => navigateTp("/register")}>Not Registered?</p>
+                </div>
+                <div style={{ justifyContent: "center", alignItems: "center" }}>
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+        </div>
     )
 }
 
