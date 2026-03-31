@@ -32,7 +32,7 @@ const Login = () => {
             navigateTp("/")
 
         }catch(error){
-            toast.error(error.response.data.message ||"Server not running")
+            toast.error(error.response?.data?.message ||"Server not running")
         }
 
     }
@@ -48,12 +48,12 @@ const Login = () => {
                 <input type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
                 <input type="Password" value={confirmPassword} placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)}></input>
                 <div style={{ gap: "10px", justifyContent: "flex-end", flexDirection: "row" }}>
-                    <p style={{ marginBottom: 0 }} onClick={() => navigateTp("/register")}>Not Registered?</p>
+                    <p style={{ marginBottom: 0 }} onClick={() => navigateTp("/register")}>Not Registered? <span style={{color:"blue"}}>Registeded</span></p>
                 </div>
                 <div style={{ justifyContent: "center", alignItems: "center" }}>
                     <button type="submit">Login</button>
                 </div>
-                
+
             </form>
         </div>
     )

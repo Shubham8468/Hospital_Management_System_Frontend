@@ -38,7 +38,7 @@ const Register = () => {
                     headers: { "Context-Type": "application/json" }
                 })
             toast.success(response.data?.message);
-               navigateTp("/login")
+            navigateTp("/login")
         } catch (error) {
             toast.error(error.response?.data?.message);
 
@@ -51,27 +51,29 @@ const Register = () => {
             <p>Register to access hospital services, book appointments, and manage your health records securely.</p>
             <form onSubmit={handelResister}>
                 <div>
-                <input type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                <input type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />  
-               </div>
-               <div>
-                <input type="number" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
-                <input type="number" placeholder="Addaar-Number" value={aadhaarNumber} onChange={(e) => setAadhaarNumber(e.target.value)} />
-                    </div>
-                    <div>
-                <input type="date" placeholder="Date fo Birth" value={dob} onChange={(e) => setDob(e.target.value)} />
-                <select value={gender} onChange={(e)=>setGender(e.target.value)}>
-                    <option value={"male"}>Male</option>
-                    <option value={"female"}>Female</option>
-                    <option value={"other"}>Others</option>
-                </select>
+                    <input type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                    <input type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                 </div>
                 <div>
-                <input type="passwprd" placeholder="Enter 8 Digite Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="number" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                    <input type="number" placeholder="Addaar-Number" value={aadhaarNumber} onChange={(e) => setAadhaarNumber(e.target.value)} />
                 </div>
+                <div>
+                    <input type="date" placeholder="Date fo Birth" value={dob} onChange={(e) => setDob(e.target.value)} />
+                    <select value={gender} onChange={(e) => setGender(e.target.value)}>
+                        <option value={"male"}>Male</option>
+                        <option value={"female"}>Female</option>
+                        <option value={"other"}>Others</option>
+                    </select>
+                </div>
+
+                <div>
+                    <input type="passwprd" placeholder="Enter 8 Digite Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                </div>
+
                 <div style={{ gap: "10px", justifyContent: "flex-end", flexDirection: "row" }}>
-                    <p style={{ marginBottom: 0 }} onClick={() => navigateTp("/login")}>Already have an account? Login</p>
+                    <p style={{ marginBottom: 0 }} onClick={() => navigateTp("/login")}>Already have an account? <span style={{ color: "blue" }}>Login</span></p>
                 </div>
                 <div style={{ justifyContent: "center", alignItems: "center" }}>
                     <button type="submit">Register</button>

@@ -12,6 +12,7 @@ import Navbar from "../src/components/Navbar"
 import axios from "axios";
 import { Context } from "./main";
 
+
 const App = () => {
   const {isAuthenticated,setIsAuthenticated,setUser}=useContext(Context);
   useEffect(()=>{
@@ -43,6 +44,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
+       
       </Router>
       <ToastContainer />
     </ToastProvider>

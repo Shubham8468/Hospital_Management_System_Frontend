@@ -3,6 +3,7 @@ import { useToast } from "./Toast/ToastContext";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Context } from "../main";
+import {GiHamburgerMenu} from "react-icons/gi"
 const Navbar = () => {
     const toast = useToast();
     const [show, setShow] = useState(false)
@@ -21,8 +22,6 @@ const Navbar = () => {
         } catch (error) {
             toast.error(error.response?.data?.message || "Failed To Logout User!")
         }
-
-
     }
     //For Login 
     const gotologin = () => {
@@ -30,7 +29,7 @@ const Navbar = () => {
     }
     return (
         <nav className="container">
-            <div className="logo " onClick={() => navigateTp("/")}>ZeeCare</div>
+            <div className="logo " onClick={() => navigateTp("/")}> <img className="logo-img" src="/logo.png" alt="logo"/></div>
             <div className={show ? "navLinks showmenu" : "navLinks"}>
                 <div className="links">
                     <Link to={"/"}>Home</Link>
@@ -39,6 +38,10 @@ const Navbar = () => {
                 </div>
                 {isAuthenticated ? (<button className="logoutBtn btn" onClick={() => handelLogout()}>LOGOUT</button>) :
                     (<button className="logoutBtn btn" onClick={gotologin}>LOGIN</button>)}
+            </div>
+            <div className="hamburgut" onClick={()=>setShow(!show)}>
+                <GiHamburgerMenu/>
+
             </div>
         </nav>
     )
