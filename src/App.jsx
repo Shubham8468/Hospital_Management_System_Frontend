@@ -11,6 +11,7 @@ import ToastContainer from "./components/Toast/Toast";
 import Navbar from "../src/components/Navbar"
 import axios from "axios";
 import { Context } from "./main";
+import Footer from "./components/Footer";
 
 
 const App = () => {
@@ -44,7 +45,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
-       
+       <Footer/>
       </Router>
       <ToastContainer />
     </ToastProvider>
