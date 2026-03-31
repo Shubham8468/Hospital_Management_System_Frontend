@@ -3,7 +3,8 @@ import { useToast } from "./Toast/ToastContext";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Context } from "../main";
-import { GiHamburgerMenu } from "react-icons/gi"
+import { GiHamburgerMenu } from "react-icons/gi";
+import { getApiUrl, API_ENDPOINTS } from "../config/apiConfig";
 
 const Navbar = () => {
     const toast = useToast();
@@ -13,7 +14,7 @@ const Navbar = () => {
     // Handle logout
     const handleLogout = async () => {
         try {
-            const resp = await axios.get("http://localhost:4800/api/v1/user/patient/logout", {
+            const resp = await axios.get(getApiUrl(API_ENDPOINTS.USER_LOGOUT), {
                 withCredentials: true
             });
             toast.success(resp.data?.message);

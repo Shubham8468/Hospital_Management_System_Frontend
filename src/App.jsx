@@ -12,6 +12,7 @@ import Navbar from "../src/components/Navbar"
 import axios from "axios";
 import { Context } from "./main";
 import Footer from "./components/Footer";
+import { getApiUrl, API_ENDPOINTS } from "./config/apiConfig";
 
 
 const App = () => {
@@ -19,7 +20,7 @@ const App = () => {
   useEffect(()=>{
     const fetchUser=async ()=>{
       try{
-        const response = await axios.get("http://localhost:4800/api/v1/user/patient/me",{
+        const response = await axios.get(getApiUrl(API_ENDPOINTS.USER_ME),{
           withCredentials:true
         });
         setIsAuthenticated(true),

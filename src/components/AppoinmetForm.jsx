@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../components/Toast/ToastContext";
 import { Context } from "../main.jsx"
+import { getApiUrl, API_ENDPOINTS } from "../config/apiConfig";
 
 const AppointmentForm = () => {
     const navigate = useNavigate();
@@ -41,7 +42,7 @@ const AppointmentForm = () => {
         const fetchDoctors = async () => {
             setDoctorLoading(true);
             try {
-                const { data } = await axios.get("http://localhost:4800/api/v1/user/doctors",
+                const { data } = await axios.get(getApiUrl(API_ENDPOINTS.GET_DOCTORS),
                     { withCredentials: true }
                 );
                 setDoctors(data.doctore || []);
@@ -92,7 +93,7 @@ const AppointmentForm = () => {
         
         setLoading(true);
         try {
-            const response = await axios.post("http://localhost:4800/api/v1/appointment/post", {
+            const response = await axios.post(getApiUrl(API_ENDPOINTS.POST_APPOINTMENT), {
                 firstName, lastName, email, phone, aadhaarNumber,
                 dob, gender, hasVisited, address,
                 doctor_firstName: doctorFirstName,
