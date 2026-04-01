@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "../components/Toast/ToastContext";
 import { Context } from "../main.jsx"
 import { getApiUrl, API_ENDPOINTS } from "../config/apiConfig";
+import {API_BASE_URL} from "../config/apiConfig.js"
 
 const AppointmentForm = () => {
     const navigate = useNavigate();
@@ -42,7 +43,7 @@ const AppointmentForm = () => {
         const fetchDoctors = async () => {
             setDoctorLoading(true);
             try {
-                const { data } = await axios.get(getApiUrl(API_ENDPOINTS.GET_DOCTORS),
+                const { data } = await axios.get(`${API_BASE_URL}/api/v1/user/doctors`,
                     { withCredentials: true }
                 );
                 setDoctors(data.doctore || []);
@@ -93,7 +94,7 @@ const AppointmentForm = () => {
         
         setLoading(true);
         try {
-            const response = await axios.post(getApiUrl(API_ENDPOINTS.POST_APPOINTMENT), {
+            const response = await axios.post(`${API_BASE_URL}/api/v1/appointment/post`, {
                 firstName, lastName, email, phone, aadhaarNumber,
                 dob, gender, hasVisited, address,
                 doctor_firstName: doctorFirstName,
