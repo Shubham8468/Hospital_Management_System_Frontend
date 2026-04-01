@@ -19,14 +19,17 @@ const Navbar = () => {
             });
             toast.success(resp.data?.message);
             setIsAuthenticated(false);
+            setShow(false);
             navigate("/");
         } catch (error) {
             toast.error(error.response?.data?.message || "Failed to logout");
+            setShow(false);
         }
     };
 
     // Navigate to login page
     const goToLogin = () => {
+        setShow(false);
         navigate("/login");
     };
 
