@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../main";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useToast } from "../components/Toast/ToastContext";
 import axios from "axios";
-import {API_BASE_URL} from "../config/apiConfig.js"
+import { API_BASE_URL } from "../config/apiConfig.js"
 
 const Login = () => {
     const { isAuthenticated, setIsAuthenticated } = useContext(Context);
@@ -17,23 +17,26 @@ const Login = () => {
 
     const handelLogin = async (e) => {
         e.preventDefault();
-       
-            if (isAuthenticated) {
-            return <navigateTp to={"/"} />
-            }
-        try{
-            const response= await axios.post(`${API_BASE_URL}/api/v1/user/patient/login`,{
-                email,password,confirmPassword,role:"Patient"
-            },{
-                withCredentials:true ,
-                headers:{"Context-Type":"application/json"}
-            })
-            toast.success(response.data?.message);
-            //after this we re derdicter to user Home page
-            navigateTp("/")
 
-        }catch(error){
-            toast.error(error.response?.data?.message ||"Server not running")
+        if (isAuthenticated) {
+            return <navigateTp to={"/"} />
+        }
+        try {
+            const response = await axios.post(`${API_BASE_URL}/api/v1/user/patient/login`, {
+                email, password, confirmPassword, role: "Patient"
+            }, {
+                withCredentials: true,
+                headers: { "Context-Type": "application/json" }
+            }).then((res) => {
+                toast.success(res.data?.message);
+                setIsAuthenticated(true);
+                navigateTp("/")
+                setEmail("");
+                setPassword("");
+                setConfirmPassword("");
+            });
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Server not running")
         }
 
     }
@@ -41,15 +44,15 @@ const Login = () => {
     return (
         <div className="container form-component login-form">
             <h1>Welcome to ZeeCare Portal</h1>
-            
+
             <p>Please Login To Continue</p>
-            <p style={{marginTop:"50px"}}> To manage appointments, view medical records, and stay connected with your healthcare provider.</p>
+            <p style={{ marginTop: "50px" }}> To manage appointments, view medical records, and stay connected with your healthcare provider.</p>
             <form onSubmit={handelLogin}>
                 <input type="text" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)}></input>
                 <input type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
                 <input type="Password" value={confirmPassword} placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)}></input>
                 <div style={{ gap: "10px", justifyContent: "flex-end", flexDirection: "row" }}>
-                    <p style={{ marginBottom: 0 }} onClick={() => navigateTp("/register")}>Not Registered? <span style={{color:"blue"}}>Registeded</span></p>
+                    <p style={{ marginBottom: 0 }} onClick={() => navigateTp("/register")}>Not Registered? <span style={{ color: "blue" }}>Registeded</span></p>
                 </div>
                 <div style={{ justifyContent: "center", alignItems: "center" }}>
                     <button type="submit">Login</button>
