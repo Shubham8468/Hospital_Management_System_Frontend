@@ -3,6 +3,7 @@ import { Context } from "../main";
 import {  useNavigate } from "react-router-dom";
 import { useToast } from "../components/Toast/ToastContext";
 import axios from "axios";
+import {API_BASE_URL} from "../config/apiConfig.js"
 
 const Login = () => {
     const { isAuthenticated, setIsAuthenticated } = useContext(Context);
@@ -21,7 +22,7 @@ const Login = () => {
             return <navigateTp to={"/"} />
             }
         try{
-            const response= await axios.post("http://localhost:4800/api/v1/user/patient/login",{
+            const response= await axios.post(`${API_BASE_URL}/api/v1/user/patient/login`,{
                 email,password,confirmPassword,role:"Patient"
             },{
                 withCredentials:true ,

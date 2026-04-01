@@ -1,6 +1,5 @@
 // API Configuration
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4800';
-
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://hospital-management-system-backend-kappa.vercel.app';
 export const API_ENDPOINTS = {
   // User endpoints
   USER_LOGIN: '/api/v1/user/patient/login',

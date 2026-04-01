@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useToast } from "./Toast/ToastContext";
+import { API_BASE_URL } from "../config/apiConfig.js";
 
 
 const MessageForm = () => {
@@ -15,7 +16,7 @@ const MessageForm = () => {
 const handleMessage=async (e)=>{
     e.preventDefault();
     try{
-        const { data } = await axios.post("http://localhost:4800/api/v1/message/send",
+        const { data } = await axios.post(`${API_BASE_URL}/api/v1/message/send`,
             {
                 // In this we add our user give data for the send to Backend
                 firstName,lastName,email,phone,message
