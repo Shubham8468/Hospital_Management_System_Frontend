@@ -23,17 +23,16 @@ const App = () => {
         const response = await axios.get(getApiUrl(API_ENDPOINTS.USER_ME),{
           withCredentials:true
         });
-        setIsAuthenticated(true),
+        setIsAuthenticated(true);
         setUser(response.data.user);// here we store user data that are comes from backend 
 
       }catch(error){
         setIsAuthenticated(false);
-        setUser({})
-
+        setUser({});
       }
     }
     fetchUser();
-  },[isAuthenticated]) // jb bhi isAuth ki value change ho to ye run kre 
+  },[]) // Only run once on mount to check if user is already authenticated 
 
   return (
     <ToastProvider>

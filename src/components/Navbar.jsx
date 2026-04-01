@@ -19,7 +19,7 @@ const Navbar = () => {
             });
             toast.success(resp.data?.message);
             setIsAuthenticated(false);
-
+            navigate("/");
         } catch (error) {
             toast.error(error.response?.data?.message || "Failed to logout");
         }

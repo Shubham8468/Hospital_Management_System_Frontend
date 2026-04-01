@@ -19,14 +19,15 @@ const Login = () => {
         e.preventDefault();
 
         if (isAuthenticated) {
-            return <navigateTp to={"/"} />
+            navigateTo("/");
+            return;
         }
         try {
             const response = await axios.post(`${API_BASE_URL}/api/v1/user/patient/login`, {
                 email, password, confirmPassword, role: "Patient"
             }, {
                 withCredentials: true,
-                headers: { "Context-Type": "application/json" }
+                headers: { "Content-Type": "application/json" }
             }).then((res) => {
                 toast.success(res.data?.message);
                 setIsAuthenticated(true);
@@ -52,7 +53,7 @@ const Login = () => {
                 <input type="password" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)}></input>
                 <input type="Password" value={confirmPassword} placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)}></input>
                 <div style={{ gap: "10px", justifyContent: "flex-end", flexDirection: "row" }}>
-                    <p style={{ marginBottom: 0 }} onClick={() => navigateTp("/register")}>Not Registered? <span style={{ color: "blue" }}>Registeded</span></p>
+                    <p style={{ marginBottom: 0 }} onClick={() => navigateTp("/register")}>Not Registered? <span style={{ color: "blue" }}>Register</span></p>
                 </div>
                 <div style={{ justifyContent: "center", alignItems: "center" }}>
                     <button type="submit">Login</button>
